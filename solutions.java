@@ -1,9 +1,11 @@
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Stack;
 
 class solutions {
     /**
-     * Arrays
+     * Arrays & Hashing *********************************
      */
     // Return true if any value appears at least twice in the array
     // Return false if every element is distinct
@@ -50,6 +52,9 @@ class solutions {
         }
         return new int[]{-1,-1};
     }
+    /**
+     * Two Pointers *********************************
+     */
     public boolean isPalindrome(String s) {
         s = s.toLowerCase().replaceAll("\\s", "").replaceAll("[^a-z0-9]", "");
         // System.out.println(s);
@@ -64,6 +69,9 @@ class solutions {
         }
         return true;
     }
+    /**
+     * Sliding Window *********************************
+     */
     public int maxProfit(int[] prices) {
         int largestDif = 0;
         int minSoFar = Integer.MAX_VALUE;
@@ -76,5 +84,31 @@ class solutions {
             }
         }
         return largestDif;
+    }
+    /**
+     * Stack *********************************
+     */
+    public boolean isValid(String s) {
+        Stack<Character> cStack = new Stack<Character>();
+        Map<Character, Character> map = Map.of(
+                                            '(', ')',
+                                            '{', '}',
+                                            '[', ']'
+                                            );
+        for(Character c : s.toCharArray()){
+            if(map.containsKey(c)){
+                cStack.push(c);
+            }else{
+                if(cStack.isEmpty()){
+                    return false;
+                }else{
+                    char open = cStack.pop();
+                    if(map.get(open) != c){
+                        return false;
+                    }
+                }
+            }
+        }
+        return cStack.isEmpty();
     }
 }
