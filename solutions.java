@@ -50,4 +50,18 @@ class solutions {
         }
         return new int[]{-1,-1};
     }
+    public boolean isPalindrome(String s) {
+        s = s.toLowerCase().replaceAll("\\s", "").replaceAll("[^a-z0-9]", "");
+        // System.out.println(s);
+        int rightCounter = s.length() - 1;
+        int leftCounter = 0;
+        while(leftCounter < rightCounter){
+            if(s.charAt(rightCounter) != s.charAt(leftCounter)){
+                return false;
+            }
+            rightCounter -= 1;
+            leftCounter += 1;
+        }
+        return true;
+    }
 }
