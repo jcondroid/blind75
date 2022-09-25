@@ -39,12 +39,13 @@ class solutions {
         }
        return charMap.isEmpty();
     }
+    /**
+     * Return indices of two numbers such that they add up to target.
+     * You may assume that each input would have exactly one solution, and you may not use the same element twice.
+     */
     public int[] twoSum(int[] nums, int target) {
-        // Assumptions: There is only one unique solution
         for(int i = 0; i < nums.length; i++){
-            // traverse nums array
             for(int j = i+1; j < nums.length; j++){
-                // 
                 if(nums[i] + nums[j] == target){
                     return new int[]{i,j};
                 }
@@ -55,9 +56,14 @@ class solutions {
     /**
      * Two Pointers *********************************
      */
+    /**
+     * Given a string s, return true if it is a palindrome, or false otherwise.
+     * A phrase is a palindrome if, 
+     * after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, 
+     * it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+     */
     public boolean isPalindrome(String s) {
         s = s.toLowerCase().replaceAll("\\s", "").replaceAll("[^a-z0-9]", "");
-        // System.out.println(s);
         int rightCounter = s.length() - 1;
         int leftCounter = 0;
         while(leftCounter < rightCounter){
@@ -71,6 +77,12 @@ class solutions {
     }
     /**
      * Sliding Window *********************************
+     */
+    /**
+     * Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+     * You are given an array prices where prices[i] is the price of a given stock on the ith day.
+     * You want to maximize your profit by choosing a single day to buy one stock 
+     * and choosing a different day in the future to sell that stock.
      */
     public int maxProfit(int[] prices) {
         int largestDif = 0;
@@ -87,6 +99,14 @@ class solutions {
     }
     /**
      * Stack *********************************
+     */
+    /**
+     * Given a string s containing just the characters '(', ')', '{', '}', '[' and ']'. 
+     * Determine if the input string is valid.
+     * An input string is valid if:
+     *  Open brackets must be closed by the same type of brackets.
+     *  Open brackets must be closed in the correct order.
+     *  Every close bracket has a corresponding open bracket of the same type.
      */
     public boolean isValid(String s) {
         Stack<Character> cStack = new Stack<Character>();
@@ -111,4 +131,65 @@ class solutions {
         }
         return cStack.isEmpty();
     }
+    /**
+     * Linked List *********************************
+     */
+    /**
+     * Definition for singly-linked list.
+     */
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode() {}
+        ListNode(int val) { this.val = val; }
+        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    }
+    /**
+     * Given the head of a singly linked list, reverse the list, and return the reversed list.
+     */
+    public ListNode reverseList(ListNode head) {
+        ListNode reversedList = null;
+        while(head != null){
+            ListNode next = head.next;
+            head.next = reversedList;
+            reversedList = head;
+            head = next;
+        }
+        return reversedList;
+    }
+    /**
+     * You are given the heads of two sorted linked lists list1 and list2.
+     * Merge the two lists in a one sorted list. 
+     * The list should be made by splicing together the nodes of the first two lists.
+     * Return the head of the merged linked list.
+     */
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        // Keep track of the head of the merged list and the tail to add on to
+        ListNode head = new ListNode();
+        ListNode tail = head;
+        while(list1 != null && list2 != null){
+            if(list1.val > list2.val){
+                tail.next = list2;
+                list2 = list2.next;
+            }else{
+                tail.next = list1;
+                list1 = list1.next;
+            }
+            // System.out.println(tail.val);
+            tail = tail.next;
+        }
+        tail.next = list1 == null ? list2 : list1;
+        return head.next;
+        // Time O(m+n)
+        // Space O(1)
+    }
+    /**
+     * Given head, the head of a linked list, determine if the linked list has a cycle in it.
+     * There is a cycle in a linked list if there is some node in the list that can be reached 
+     * again by continuously following the next pointer. Internally, pos is used to denote the index 
+     * of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
+     * 
+     * Return true if there is a cycle in the linked list. Otherwise, return false.
+     */
+
 }
