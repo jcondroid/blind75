@@ -191,5 +191,22 @@ class solutions {
      * 
      * Return true if there is a cycle in the linked list. Otherwise, return false.
      */
-
+    public boolean hasCycle(ListNode head) {
+        if(head == null || head.next == null) return false;
+        
+        ListNode next = head.next;
+        ListNode headCounter = head;
+        while(next.next != null){
+            if(next.next == headCounter){
+                return true;
+            }
+            if(next.next.next != null){
+                next = next.next.next;
+            }else{
+                return false;
+            }
+            headCounter = headCounter.next;
+        }
+        return false;
+    }
 }
