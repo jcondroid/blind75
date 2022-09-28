@@ -209,4 +209,37 @@ class solutions {
         }
         return false;
     }
+    /**
+     * Trees *********************************
+     */
+    /**
+     * Definition for a binary tree node.
+     */
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode() {}
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+    /**
+     * Invert Binary Tree - Given the root of a binary tree, invert the tree, and return its root.
+     */
+    public TreeNode invertTree(TreeNode root) {
+        if(root != null){
+            // invert child trees
+            invertTree(root.left);
+            invertTree(root.right);
+            // swap children
+            TreeNode tmp = root.right;
+            root.right = root.left;
+            root.left = tmp;
+        }
+        return root;
+    }
 }
