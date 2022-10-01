@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -242,4 +243,110 @@ class solutions {
         }
         return root;
     }
+    /**
+     * Given the root of a binary tree, return its maximum depth.
+     * A binary tree's maximum depth is the number of nodes along the longest path from the 
+     * root node down to the farthest leaf node.
+     */
+    public int maxDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }else{
+            int left_height = maxDepth(root.left);
+            int right_height = maxDepth(root.right);
+            return java.lang.Math.max(left_height, right_height) + 1;
+        }
+    }
+    /**
+     * Same Tree
+     * Given the roots of two binary trees p and q, write a function to check if they are the same or not.
+     * Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p == null && q == null) return true;
+        if(p == null || q == null) return false;
+        if(p.val != q.val) return false;
+        
+        return isSameTree(p.right, q.right) && isSameTree(p.left, q.left);
+    }
+    /**
+     * Subtree of Another Tree
+     * Given the roots of two binary trees root and subRoot, return true if there is a subtree 
+     * of root with the same structure and node values of subRoot and false otherwise.
+     * A subtree of a binary tree tree is a tree that consists of a node in tree and all of 
+     * this node's descendants. The tree tree could also be considered as a subtree of itself.
+     * Strategy: Convert the nodes into a string and then check if one string is contained in the other string.
+     */
+    HashSet<String> trees = new HashSet<>();
+    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+        String tree1 = preOrder(root, true);
+        String tree2 = preOrder(subRoot, true);
+        return tree1.indexOf(tree2) >= 0;
+    }
+    public String preOrder(TreeNode node, boolean left){
+        if(node == null){
+            if(left) return "lnull";
+            else return "rnull";
+        }
+        return "#"+node.val+" "+preOrder(node.left, true)+" "+preOrder(node.right, false);
+    }
+    /**
+     * DP (Dynamic Programming) *********************************
+     */
+    /**
+     * Climbing Stairs
+     * You are climbing a staircase. It takes n steps to reach the top.
+     * Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+     * Strategy: 
+     * As we can see this problem can be broken into subproblems (classic DP problem), and it contains 
+     * the optimal substructure property i.e. its optimal solution can be constructed efficiently from 
+     * optimal solutions of its subproblems, we can use dynamic programming to solve this problem.
+     * One can reach i^{th}ith step in one of the two ways:
+     *  1. Taking a single step from (i-1)^{th}(i−1)th step. 
+     *  2. Taking a step of 22 from (i-2)^{th}(i−2)th step.
+     */
+    public int climbStairs(int n) {
+        if(n <= 0) return 0;
+        if(n == 1) return 1;
+        
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        for(int i = 3; i <= n; i++){
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
+    }
+    /**
+     * Intervals *********************************
+     */
+    /**
+     * Meeting Rooms
+     * Given an array of meeting time intervals where intervals[i] = [starti, endi]
+     * Determine if a person could attend all meetings.
+     * Strategy: 
+     *  Sort the meetings by starting time. 
+     *  Go through meetings one by one and check that each meeting ends before the next one starts.
+     */
+    public boolean canAttendMeetings(int[][] intervals) {
+        /**
+         * Special note about Lambda functions
+         * The -> separates the parameters (left-side) from the implementation (right side).
+         * The general syntax for using lambda expressions is (Parameters) -> { Body } 
+         * where the -> separates parameters and lambda expression body.
+         * The parameters are enclosed in parentheses which is the same way as for methods and the 
+         * lambda expression body is a block of code enclosed in braces.
+         * This would be similar to function(a, b){ return Integer.compare(a[0], b[0]);}
+         */
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0])); // Sort meetings by starting time
+        for(int i = 0; i < intervals.length - 1; i++){ // Go through each meeting one by one
+            if(intervals[i][1] > intervals[i + 1][0]){ // each meeting ends before the next one starts
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
+     * Bit Manipulation *********************************
+     */
 }
