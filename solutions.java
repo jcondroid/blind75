@@ -349,4 +349,78 @@ class solutions {
     /**
      * Bit Manipulation *********************************
      */
+    /**
+     * Number of 1 Bits
+     * Write a function that takes an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).
+     * Note:
+     * In some languages, such as Java, there is no unsigned integer type. 
+     * In this case, the input will be given as a signed integer type. 
+     * It should not affect your implementation, as the integer's internal binary 
+     * representation is the same, whether it is signed or unsigned.
+     * 
+     * In Java, the compiler represents the signed integers using 2's complement notation. 
+     * Therefore, in Example 3, the input represents the signed integer. -3.
+     * 
+     * Strategy:
+     * Instead of checking every bit of the number, we repeatedly flip the least-significant 1-bit of the number to 0
+     * and add 1 to the sum. As soon as the number becomes 0 we know that it does not have any more 1-bits and we return the sum.
+     * The key idea here is to realize that for any number n, doing a bit-wise AND of n and n - 1 flips the least-significant 
+     * 1-bit in n to 0. 
+     * Why? Consider the binary representations of n and n−1.
+     */
+    // you need to treat n as an unsigned value
+    public int hammingWeight(int n) {
+        int sum = 0;
+        while(n != 0){
+            sum++;
+            n &= (n - 1);
+        }
+        return sum;
+    }
+    /**
+     * Counting Bits
+     * Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), 
+     * ans[i] is the number of 1's in the binary representation of i.
+     * Strategy:
+     * Last set bit is the rightmost set bit. Setting that bit to zero with the bit trick, x &= x - 1, 
+     * leads to the following transition function: P(x) = P(x & (x - 1) +1)
+     */
+    public int[] countBits(int n) {
+        int[] ans = new int[n + 1];
+        for(int i = 1; i <= n; ++i){
+            ans[i] = ans[i & (i - 1)] + 1;
+        }
+        return ans;
+    }
+    /**
+     * Reverse Bits - Reverse bits of a given 32 bits unsigned integer.
+     */
+    // you need treat n as an unsigned value
+    public int reverseBits(int n) {
+        int ans = 0;
+        for(int i = 0; i < 32; i++){
+            ans <<= 1;
+            ans = ans | (n & 1);
+            n >>= 1;
+        }
+        return ans;
+    }
+    /**
+     * Missing Number
+     * Given an array nums containing n distinct numbers in the range [0, n], 
+     * return the only number in the range that is missing from the array.
+     * 
+     * Strategy:
+     * We can harness the fact that XOR is its own inverse to find the missing element in linear time.
+     * Because we know that nums contains n numbers and that it is missing exactly one number on the range [0..n-1], 
+     * we know that nn definitely replaces the missing number in nums. 
+     * If we initialize an integer to nn and XOR it with every index and value, we will be left with the missing number.
+     */
+    public int missingNumber(int[] nums) {
+        int missing = nums.length;
+        for(int i = 0; i < nums.length; i++){
+            missing ^= i ^ nums[i];
+        }
+        return missing;
+    }
 }
