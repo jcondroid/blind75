@@ -18,7 +18,7 @@ Things to know and when to use them:
 *Problems I think are easy:
 Arrays
     ContainsDuplicate
-*Problems I think are doable but need more practice:
+*Problems I am feeling better about:
 Arrays
     Valid Anagram - Not a lot of experience with HashMap
     Two Sum - Had issue before with returning an array of indices (its actually {easy})
@@ -26,10 +26,14 @@ Arrays
     Valid Palindrome - Not a lot of experience with 2 pointers and some String manipulation involved
 Sliding Window
     Best Time to Buy and Sell Stock - Seems trivial but the for loop required some thought
+List
+    Reverse Linked List - Had a really hard time visualizing the solution
+*Problems I think are doable but need more practice:
 Stack
     Valid Parenthesis - Requires use of Map
 List
-    Reverse Linked List - Had a really hard time visualizing the solution
+    Merge 2 Lists - Similar problem to Reverse Linked List but more involved
+    Linked List Cycle - Same as above
 Trees
     Invert Binary Tree - Swapping child nodes was new to me but straightforward
     Maximum Depth of Binary Tree - can't visualize how it works
@@ -40,8 +44,5 @@ DP
 Intervals
     Meeting Rooms - Sorting with lambda is new for me in Java. Need more practice with intervals.
 *Problems I think are hard:
-List
-    Merge 2 Lists - Similar problem to Reverse Linked List but more involved
-    Linked List Cycle - Same as above
 Bit Manipulation
     Skipping this BS

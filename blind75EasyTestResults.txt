@@ -1,0 +1,8 @@
+Easy Test (10.5/15 = 70%)
+Failed:
+    Merge Two Sorted Lists
+    Same Tree
+    Subtree of Another Tree
+    Climbing Stairs
+Partial Credit:
+    Meeting Rooms - Reason: Did not know Arrays.sort syntax

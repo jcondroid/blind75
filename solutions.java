@@ -80,12 +80,19 @@ class solutions {
      * Sliding Window *********************************
      */
     /**
-     * Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+     * Return the maximum profit you can achieve from this transaction. 
+     * If you cannot achieve any profit, return 0.
      * You are given an array prices where prices[i] is the price of a given stock on the ith day.
      * You want to maximize your profit by choosing a single day to buy one stock 
      * and choosing a different day in the future to sell that stock.
      */
     public int maxProfit(int[] prices) {
+        /**
+         * Strategy:
+         * We really only need to know 2 things: 
+         *  What is the largest difference (max profit)
+         *  What is the minimum
+         */
         int largestDif = 0;
         int minSoFar = Integer.MAX_VALUE;
         
@@ -147,6 +154,13 @@ class solutions {
     }
     /**
      * Given the head of a singly linked list, reverse the list, and return the reversed list.
+     */
+    /**
+     * Strategy: 
+     *  Set next equal to head.next (Next node so we don't lose reference)
+     *  Set head.next equal to previous (null starting out)
+     *  Set previous equal to current (head)
+     *  Set current equal to next
      */
     public ListNode reverseList(ListNode head) {
         ListNode reversedList = null;
@@ -230,6 +244,9 @@ class solutions {
     }
     /**
      * Invert Binary Tree - Given the root of a binary tree, invert the tree, and return its root.
+     *      3
+     *     / \
+     *    1   4
      */
     public TreeNode invertTree(TreeNode root) {
         if(root != null){
